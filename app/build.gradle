@@ -1,4 +1,4 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
@@ -7,6 +7,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
+        applicationId "com.fgiris.androidmodulesample"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -14,11 +15,27 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            applicationIdSuffix ".debug"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "tier"
+    productFlavors{
+        free{
+            dimension "tier"
+            applicationIdSuffix ".free"
+        }
+        pro{
+            dimension "tier"
+            applicationIdSuffix ".pro"
+        }
+    }
+
 }
 
 dependencies {
